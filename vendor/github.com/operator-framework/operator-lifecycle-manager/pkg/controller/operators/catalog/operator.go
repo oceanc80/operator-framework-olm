@@ -1579,6 +1579,7 @@ func (o *Operator) syncInstallPlans(obj interface{}) (syncError error) {
 			logger.Warnf("status not equal, updating...")
 			if _, err := o.client.OperatorsV1alpha1().InstallPlans(out.GetNamespace()).UpdateStatus(context.TODO(), out, metav1.UpdateOptions{}); err != nil {
 				syncError = fmt.Errorf("failed to update installplan bundle lookups: %v", err)
+				logger.Infof("BZ-2113879 failed installplan status update: %v", out)
 			}
 
 			return
